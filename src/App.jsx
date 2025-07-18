@@ -58,7 +58,7 @@ export default function App() {
     <div className="relative w-full h-screen font-sans">
       {/* Header */}
      <div
-  className="bg-[url('/images/pattern-bg-mobile.png')] md:bg-[url('/images/bg-desktop.jpg')] 
+  className="bg-[url('/images/pattern-bg-mobile.png')] md:bg-[url('/images/pattern-bg-desktop.png')] 
              bg-cover bg-center p-6 text-white text-center z-10 relative"
 >
         <h1 className="text-3xl md:text-4xl font-bold">IP Address Tracker</h1>
@@ -67,8 +67,8 @@ export default function App() {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search for IP or domain"
-            className="px-4 py-2 rounded-l-md w-64 md:w-96 text-black focus:outline-none"
+            placeholder="Search for any IP address or domain"
+            className="px-4 py-2 rounded-l-md w-64 md:w-96 text-black focus:outline-none bg-white font-semibold"
           />
           <button
             onClick={handleSearch}
