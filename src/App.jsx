@@ -23,7 +23,7 @@ export default function App() {
   const [coords, setCoords] = useState([51.505, -0.09]);
 
   const fetchIPData = async (ipOrDomain = "") => {
-    const apiKey = "at_rSqiQXzhkmfYGtGgTMA2lWrwZZgWw";
+    const apiKey = " import.meta.env.VITE_GEO_API_KEY";
     const url = `https://geo.ipify.org/api/v2/country,city?apiKey=${apiKey}&${
       ipOrDomain ? `ipAddress=${ipOrDomain}` : ""
     }`;
