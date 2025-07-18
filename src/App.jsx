@@ -3,12 +3,14 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
+// Custom marker icon
 const markerIcon = new L.Icon({
   iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
   iconSize: [35, 45],
   iconAnchor: [17, 46],
 });
 
+// Component to change map center on coordinate update
 function ChangeMapView({ coords }) {
   const map = useMap();
   useEffect(() => {
@@ -23,7 +25,7 @@ export default function App() {
   const [coords, setCoords] = useState([51.505, -0.09]);
 
   const fetchIPData = async (ipOrDomain = "") => {
-    const apiKey = " at_rSqiQXzhkmfYGtGgTMA2lWrwZZgWw";
+    const apiKey = "at_rSqiQXzhkmfYGtGgTMA2lWrwZZgWw";
     const url = `https://geo.ipify.org/api/v2/country,city?apiKey=${apiKey}&${
       ipOrDomain ? `ipAddress=${ipOrDomain}` : ""
     }`;
@@ -36,11 +38,11 @@ export default function App() {
         setData(result);
         setCoords([result.location.lat, result.location.lng]);
       } else {
-        throw new Error("Invalid data");
+        throw new Error("Invalid response");
       }
     } catch (err) {
       console.error("Error fetching IP info", err);
-      alert("Invalid IP or domain. Try again.");
+      alert("Failed to fetch IP address info. Please check the address and try again.");
     }
   };
 
@@ -56,11 +58,11 @@ export default function App() {
 
   return (
     <div className="relative w-full h-screen font-sans">
-      {/* Header */}
-     <div
-  className="bg-[url('/images/pattern-bg-mobile.png')] md:bg-[url('/images/pattern-bg-desktop.png')] 
-             bg-cover bg-center p-6 text-white text-center z-10 relative"
->
+      {/* Header with responsive background image */}
+      <div
+        className="bg-[url('/images/pattern-bg-mobile.png')] md:bg-[url('/images/pattern-bg-desktop.png')]
+                   bg-cover bg-center p-6 text-white text-center z-10 relative h-52 md:h-60"
+      >
         <h1 className="text-3xl md:text-4xl font-bold">IP Address Tracker</h1>
         <div className="flex justify-center mt-4">
           <input
@@ -81,7 +83,7 @@ export default function App() {
 
       {/* Info Panel */}
       {data && (
-        <div className="bg-white shadow-xl rounded-xl w-[90%] max-w-5xl mx-auto mt-6 z-20 relative grid grid-cols-1 md:grid-cols-4 gap-6 p-6 text-center md:text-left ">
+        <div className="bg-white shadow-xl rounded-xl w-[90%] max-w-5xl mx-auto -mt-16 z-20 relative grid grid-cols-1 md:grid-cols-4 gap-6 p-6 text-center md:text-left">
           <div>
             <p className="text-xs text-gray-500 uppercase">IP Address</p>
             <p className="font-bold text-lg break-all">{data.ip}</p>
@@ -104,16 +106,16 @@ export default function App() {
       )}
 
       {/* Map */}
-      <div className="mt-6 h-[calc(100%-300px)] z-0">
+      <div className="mt-6 h-[calc(100vh-320px)] md:h-[calc(100vh-300px)] z-0">
         <MapContainer
           center={coords}
           zoom={13}
           scrollWheelZoom={true}
-          className="h-full w-full"
+          className="h-full w-full z-0"
         >
           <TileLayer
-            attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>'
-            url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution="&copy; OpenStreetMap contributors"
           />
           <ChangeMapView coords={coords} />
           <Marker position={coords} icon={markerIcon}>
