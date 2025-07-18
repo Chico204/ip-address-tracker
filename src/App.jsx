@@ -81,7 +81,7 @@ export default function App() {
 
       {/* Info Panel */}
       {data && (
-        <div className="bg-white shadow-xl rounded-xl w-[90%] max-w-5xl mx-auto mt-6 z-20 relative grid grid-cols-1 md:grid-cols-4 gap-6 p-6 text-center md:text-left">
+        <div className="bg-white shadow-xl rounded-xl w-[90%] max-w-5xl mx-auto mt-6 z-20 relative grid grid-cols-1 md:grid-cols-4 gap-6 p-6 text-center md:text-left ">
           <div>
             <p className="text-xs text-gray-500 uppercase">IP Address</p>
             <p className="font-bold text-lg break-all">{data.ip}</p>
